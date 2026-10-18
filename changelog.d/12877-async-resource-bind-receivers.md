@@ -1,0 +1,3 @@
+Fix public AsyncResource receiver validation and bind dispatch. Foreign receivers throw a plain TypeError while internal closed-resource tolerance remains unchanged. Implicit bindings look up public runInAsyncScope on each invocation; explicit thisArg bindings capture it at creation. Preserve callback-first validation, public callback length attributes, argument/receiver forwarding and GC roots.
+
+Add one public node-parity regression fixture. On the tested parent baseline, independent safe coverage is 166 PASS, eight known parity failures and one unchanged watcher timeout, with 23 cases not run; this is not full async_hooks certification. Depends on #12872.
