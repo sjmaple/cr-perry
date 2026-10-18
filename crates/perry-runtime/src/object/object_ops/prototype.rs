@@ -501,6 +501,18 @@ pub(crate) fn get_prototype_of_resolved(obj_value: f64) -> f64 {
             f64::from_bits(TAG_NULL)
         }
     };
+    if top16 == 0x7FFD {
+        let closure = (bits & crate::value::POINTER_MASK) as usize;
+        if crate::object::class_value::class_closure_id(closure).is_some() {
+            // Heritage belongs to this evaluation's function object, not its
+            // class-id template; the same traced edge also records retargeting.
+            return f64::from_bits(unsafe {
+                crate::object::class_value::constructor_parent_bits(
+                    closure as *mut crate::closure::ClosureHeader,
+                )
+            });
+        }
+    }
     if let Some(class_id) = crate::object::class_value::legacy_class_value_word(bits) {
         // An explicit `Object.setPrototypeOf(Ctor, obj)` wins over every
         // derived answer below — it IS the constructor's [[Prototype]].
