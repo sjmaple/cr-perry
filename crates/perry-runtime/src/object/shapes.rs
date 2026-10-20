@@ -64,7 +64,8 @@ mod shapes_linked_birth;
 mod shapes_prototype;
 pub(crate) use shapes_linked_birth::{
     complete_layout_generation, declaration_parent_identity, mutation_generation,
-    pristine_declaration_holder, stamp_linked_final_shape, stamp_linked_final_shape_requested,
+    pristine_declaration_holder, shape_is_evaluation_layout_of, stamp_linked_final_shape,
+    stamp_linked_final_shape_requested,
 };
 #[path = "layout_probe.rs"]
 pub(crate) mod layout_probe;
